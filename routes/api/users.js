@@ -7,7 +7,6 @@ const keys = require('../../config/keys')
 // Load Input Validation
 const validateSignupInput = require('../../validation/signup')
 const validateLoginInput = require('../../validation/login')
-const validatePasswordInput = require('../../validation/password')
 
 const User = require('../../models/User')
 const Profile = require('../../models/Profile')
@@ -15,7 +14,6 @@ const Profile = require('../../models/Profile')
 // @route POST api/users/signup
 // @desc Signup user
 // @access Public
-
 router.post('/signup', (req, res) => {
   const { errors, isValid } = validateSignupInput(req.body)
   // Check for validation errors
