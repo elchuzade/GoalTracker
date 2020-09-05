@@ -14,3 +14,5 @@ const ProfileSchema = new Schema(
     goals: [String]
   }
 )
+
+module.exports = Profile = mongoose.model('profile', ProfileSchema)
