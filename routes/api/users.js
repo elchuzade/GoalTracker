@@ -20,6 +20,7 @@ router.post('/signup', (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors)
   }
+
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = 'Email already exists'
@@ -42,12 +43,7 @@ router.post('/signup', (req, res) => {
               newUser
                 .save()
                 .then(user => 
-                  res.status(200).json({
-                    item: user,
-                    source: 'user',
-                    status: 'success',
-                    message: 'Signed up Successfully!'
-                  })
+                  res.status(200).json(user)
                 )
                 .catch(err => console.log(err))
             })

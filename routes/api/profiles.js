@@ -49,12 +49,7 @@ router.put(
         foundProfile
           .save()
           .then(savedProfile =>
-            res.status(200).json({
-              item: savedProfile,
-              source: 'profile',
-              status: 'success',
-              message: 'Updated profile successfully!'
-            })
+            res.status(200).json(savedProfile)
           )
           .catch(err => {
             errors.profile = 'Profile can not be updated'
@@ -69,3 +64,5 @@ router.put(
       })
   }
 )
+
+module.exports = router

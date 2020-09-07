@@ -7,6 +7,7 @@ const path = require('path')
 const users = require('./routes/api/users')
 const profiles = require('./routes/api/profiles')
 const goals = require('./routes/api/goals')
+const MongoClient = require('mongodb').MongoClient;
 
 const app = express()
 
@@ -15,12 +16,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 
-// DB config
 const db = require('./config/keys').mongoURI
 
 // Connect to MongoDB
 mongoose
-  .connect(db)
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('- MongoDB Error - ', err))
 

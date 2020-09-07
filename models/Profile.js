@@ -11,7 +11,11 @@ const ProfileSchema = new Schema(
       type: String,
       required: true
     },
-    goals: [String]
+    deleted: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
   }
 )
 

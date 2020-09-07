@@ -3,6 +3,10 @@ const Schema = mongoose.Schema
 
 const GoalSchema = new Schema(
   {
+    user: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
       required: true
@@ -10,7 +14,12 @@ const GoalSchema = new Schema(
     description: {
       type: String
     },
-    status: [Object]
+    status: [Object],
+    deleted: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
   }
 )
 
