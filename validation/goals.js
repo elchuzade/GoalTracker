@@ -4,10 +4,10 @@ const isEmpty = require('./is-empty')
 module.exports = function validateGoalInput (data) {
   let errors = {}
 
-  data.name = !isEmpty(data.name) ? data.name : ''
+  data.title = !isEmpty(data.title) ? data.title : ''
 
-  if (Validator.isEmpty(data.name)) {
-    errors.name = 'Name is required'
+  if (Validator.isEmpty(data.title)) {
+    errors.title = 'Title is required'
   }
 
   return {

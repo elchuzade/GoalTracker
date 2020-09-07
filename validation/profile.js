@@ -6,7 +6,7 @@ module.exports = function validateProfileInput (data) {
 
   data.name = !isEmpty(data.name) ? data.name : ''
 
-  if (!Validator.isEmpty(data.name)) {
+  if (Validator.isEmpty(data.name)) {
     errors.name = 'Name is required'
   }
 

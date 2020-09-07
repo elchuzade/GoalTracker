@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 
+// DB config
 const db = require('./config/keys').mongoURI
 
 // Connect to MongoDB
@@ -26,6 +27,9 @@ mongoose
 
 // Passport middleware
 app.use(passport.initialize())
+
+// Passport Config
+require('./config/passport')(passport)
 
 // Use routes
 app.use('/api/users', users)

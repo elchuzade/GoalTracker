@@ -78,14 +78,9 @@ router.post('/login', (req, res) => {
         .compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            if (!user.active) {
-              errors.activation = 'Account has not been activated yet!'
-              return res.status(400).json(errors)
-            }
             // User Matched
             const payload = {
               id: user.id,
-              name: user.name,
               permission: user.permission,
               profile: user.profile
             } // jwt payload

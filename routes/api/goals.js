@@ -22,7 +22,7 @@ router.get(
     })
 })
 
-// @route GET api/goals/
+// @route GET api/goals/:id
 // @desc Get all goals
 // @access Private
 router.get(
@@ -44,7 +44,7 @@ router.get(
 // @desc Post new goal
 // @access Private
 router.post(
-  '/:id',
+  '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
   const { errors, isValid } = validateGoalsInput(req.body)
@@ -54,7 +54,7 @@ router.post(
   }
   const newGoal = {}
   newGoal.user = req.user.id
-  newGoal.name = req.body.name
+  newGoal.title = req.body.title
   newGoal.description = req.body.description
   newGoal.status = [{
     date: Date.now(),
@@ -64,6 +64,36 @@ router.post(
     .save()
     .then(savedGoal => {
       return res.status(200).json(savedGoal)
+    })
+})
+
+// @route PUT api/goals/:id
+// @desc Update goal
+// @access Private
+router.put(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+  const { errors, isValid } = validateGoalsInput(req.body)
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors)
+  }
+  Goal.findById(req.params.id)
+    .then(goal => {
+      if (req.body.title) goal.title = req.body.title
+      if (req.body.description) goal.description = req.body.description
+
+      goal
+        .save()
+        .then(savedGoal => {
+          return res.status(200).json(savedGoal)
+        })
+    })
+    .catch(err => {
+      errors.message = 'Goal not found'
+        console.log(err)
+        return res.status(404).json(errors)
     })
 })
 

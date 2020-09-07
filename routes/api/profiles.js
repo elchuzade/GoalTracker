@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const Profile = require('../../models/Profile')
+const validateProfileInput = require('../../validation/profile')
 
 // @route GET api/profiles/:id
 // @desc Get profile by id

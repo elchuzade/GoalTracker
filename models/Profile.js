@@ -8,8 +8,7 @@ const ProfileSchema = new Schema(
       required: true
     },
     name: {
-      type: String,
-      required: true
+      type: String
     },
     deleted: {
       type: Boolean,
