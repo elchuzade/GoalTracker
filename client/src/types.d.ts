@@ -4,7 +4,18 @@ type SignupData = {
   password2: string;
 }
 
+type SigninData = {
+  email: string;
+  password: string;
+}
+
+type SigninResponse = {
+  success: boolean;
+  token: string;
+}
+
 type SignupFunction = (data: SignupData) => void
+type SigninFunction = (data: SigninData) => void
 
 type jwtDecode = {
   id: string;

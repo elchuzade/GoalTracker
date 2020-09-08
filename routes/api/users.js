@@ -42,9 +42,29 @@ router.post('/signup', (req, res) => {
               newUser.profile = newProfile._id
               newUser
                 .save()
-                .then(user => 
-                  res.status(200).json(user)
-                )
+                .then(user => {
+                  const payload = {
+                    id: user.id,
+                    permission: user.permission,
+                    profile: user.profile
+                  } // jwt payload
+                  // Sign Token
+                  jwt.sign(
+                    payload,
+                    keys.secretOrKey,
+                    { expiresIn: 3600 * 24 * 365 },
+                    (err, token) => {
+                      if (err) {
+                        console.log(err)
+                      } else {
+                        return res.json({
+                          success: true,
+                          token: 'Bearer ' + token
+                        })
+                      }
+                    }
+                  )
+                })
                 .catch(err => console.log(err))
             })
         })

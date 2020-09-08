@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, FormEvent } from 'react'
 import { signupAction } from '../redux/actions/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, Container, Row, Col, Input, Label, Button } from 'reactstrap'
@@ -6,7 +6,7 @@ import FormTitle from './builtin/FormTitle'
 
 interface SignupProps {}
 
-const Signup: React.FC<SignupProps> = () => {
+const Signup: FC<SignupProps> = () => {
   const [inputData, setInputData] = useState({
     email: '',
     password: '',
@@ -15,7 +15,8 @@ const Signup: React.FC<SignupProps> = () => {
 
   const dispatch = useDispatch()
 
-  const handleSignup = () => {
+  const handleSignup = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     const newUser: SignupData = {
       email: inputData.email,
       password: inputData.password,
@@ -24,31 +25,41 @@ const Signup: React.FC<SignupProps> = () => {
     dispatch(signupAction(newUser))
   }
 
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
+    setInputData({
+      ...inputData,
+      [e.currentTarget.name]: e.currentTarget.value
+    })
+  }
+
   return (
-    <Form className='form-card-user'>
+    <Form className='form-card-user' onSubmit={handleSignup}>
       <FormTitle title='Signup' />
       <Label className='form-input-label'>Email</Label>
       <Input
         className='form-input-field'
         type='text'
+        name='email'
         value={inputData.email}
-        onChange={e => setInputData({...inputData, email: e.target.value})}
+        onChange={handleChange}
       />
       <Label className='form-input-label'>Password</Label>
       <Input
         className='form-input-field'
         type='password'
+        name='password'
         value={inputData.password}
-        onChange={e => setInputData({...inputData, password: e.target.value})}  
+        onChange={handleChange} 
       />
       <Label className='form-input-label'>Confirm Password</Label>
       <Input
         className='form-input-field'
         type='password'
+        name='password2'
         value={inputData.password2}
-        onChange={e => setInputData({...inputData, password2: e.target.value})}
+        onChange={handleChange}
       />
-      <Button className='form-button' type='button' color='info' onClick={handleSignup}>Submit</Button>
+      <Button className='form-button' type='submit' color='info'>Submit</Button>
     </Form>
   )
 }
