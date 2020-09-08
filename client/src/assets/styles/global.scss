@@ -1,0 +1,36 @@
+body {
+  min-height: 100vh;
+  background: #F5FAFF !important;
+}
+
+.form {
+  &-title {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #545454;
+  }
+  &-input {
+    &-label {
+      float: left;
+      margin-bottom: 0.2rem;
+      color: #666666;
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
+    &-field {
+      margin-bottom: 1rem;
+      height: 2.6rem !important;
+      border-radius: 0.6rem !important;
+      box-shadow: 0 0 1rem #B8B8B8;
+      padding: 0 1rem !important;
+      border: none !important;
+    }
+  }
+  &-button {
+    box-shadow: 0 0 1rem #B8B8B8;
+    margin-top: 1rem;
+    min-width: 160px;
+    border-radius: 0.6rem !important;
+  }
+}

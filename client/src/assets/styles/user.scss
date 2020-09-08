@@ -1,0 +1,10 @@
+.form-card {
+  &-user {
+    position: absolute;
+    width: calc(100vw - 2rem);
+    max-width: 512px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+  }
+}

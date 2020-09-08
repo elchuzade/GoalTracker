@@ -5,7 +5,7 @@ import setAuthToken from './utils/setAuthToken'
 import PrivateRoute from './utils/PrivateRoute'
 import { logoutUser, setCurrentUser } from './redux/actions/user'
 import store from './store'
-
+import './assets/styles/App.scss'
 import SignupPage from './pages/SignupPage'
 
 const checkToken = () => {
