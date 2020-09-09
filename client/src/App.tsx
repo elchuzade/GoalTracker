@@ -7,6 +7,7 @@ import { logoutUser, setCurrentUser } from './redux/actions/user'
 import store from './store'
 import './assets/styles/App.scss'
 import SignupPage from './pages/SignupPage'
+import SigninPage from './pages/SigninPage'
 
 const checkToken = () => {
   if (localStorage.jwtToken) {
@@ -36,6 +37,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path='/signup' component={SignupPage} />
+        <Route exact path='/signin' component={SigninPage} />
       </Switch>
     </Router>
   );

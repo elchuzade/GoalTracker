@@ -13,7 +13,7 @@ export const signupAction = (data: SignupData) => async (dispatch: any) => {
   }
 }
 
-export const loginUser = (userData: SigninData) => async (dispatch: any) => {
+export const signinAction = (userData: SigninData) => async (dispatch: any) => {
   axios
     .post('/api/users/login', userData)
     .then(res => {

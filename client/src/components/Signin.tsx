@@ -1,28 +1,26 @@
 import React, { FC, useState, useEffect, FormEvent } from 'react'
-import { signupAction } from '../redux/actions/user'
+import { signinAction } from '../redux/actions/user'
 import { useDispatch } from 'react-redux'
 import { Form, Input, Label, Button } from 'reactstrap'
 import FormTitle from './builtin/FormTitle'
 
-interface SignupProps {}
+interface SigninProps {}
 
-const Signup: FC<SignupProps> = () => {
+const Signin: FC<SigninProps> = () => {
   const [inputData, setInputData] = useState({
     email: '',
-    password: '',
-    password2: ''
+    password: ''
   })
 
   const dispatch = useDispatch()
 
-  const handleSignup = (e: FormEvent<HTMLFormElement>) => {
+  const handleSignin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const newUser: SignupData = {
+    const newUser: SigninData = {
       email: inputData.email,
-      password: inputData.password,
-      password2: inputData.password2
+      password: inputData.password
     }
-    dispatch(signupAction(newUser))
+    dispatch(signinAction(newUser))
   }
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
@@ -33,8 +31,8 @@ const Signup: FC<SignupProps> = () => {
   }
 
   return (
-    <Form className='form-card-user' onSubmit={handleSignup}>
-      <FormTitle title='Signup' />
+    <Form className='form-card-user' onSubmit={handleSignin}>
+      <FormTitle title='Signin' />
       <Label className='form-input-label'>Email</Label>
       <Input
         className='form-input-field'
@@ -51,17 +49,9 @@ const Signup: FC<SignupProps> = () => {
         value={inputData.password}
         onChange={handleChange} 
       />
-      <Label className='form-input-label'>Confirm Password</Label>
-      <Input
-        className='form-input-field'
-        type='password'
-        name='password2'
-        value={inputData.password2}
-        onChange={handleChange}
-      />
       <Button className='form-button' type='submit' color='info'>Submit</Button>
     </Form>
   )
 }
 
-export default Signup
+export default Signin
