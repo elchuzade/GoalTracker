@@ -5,7 +5,7 @@ const initialState = {
   user: {}
 }
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: reducerAction) => {
   switch (action.type) {
     case 'SET_CURRENT_USER':
       return {

@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, FormEvent } from 'react'
-import { signinAction } from '../redux/actions/user'
+import { signinAction } from '../redux/actions/auth'
 import { useDispatch } from 'react-redux'
 import { Form, Input, Label, Button } from 'reactstrap'
 import FormTitle from './builtin/FormTitle'

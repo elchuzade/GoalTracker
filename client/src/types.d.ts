@@ -24,3 +24,8 @@ type jwtDecode = {
   iat: number;
   exp: number
 }
+
+type reducerAction = {
+  type: string;
+  payload: object
+}

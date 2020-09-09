@@ -48,9 +48,9 @@ const signinProcess = (data: SigninResponse) => (dispatch: any) => {
 }
 
 // Set logged in user
-export const setCurrentUser = (decoded?: jwtDecode) => {
-  return {
+export const setCurrentUser = (decoded?: jwtDecode) => (dispatch: any) => {
+  dispatch({
     type: 'SET_CURRENT_USER',
     payload: decoded ? decoded : {}
-  }
+  })
 }
