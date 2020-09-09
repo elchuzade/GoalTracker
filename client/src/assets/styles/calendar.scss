@@ -1,0 +1,50 @@
+.calendar {
+  &-container {
+    width: calc(100% - 2rem);
+    border: 2px solid grey;
+    margin: 1rem !important;
+  }
+  &-day {
+    &-container {
+      min-width: calc(100% / 7);
+      min-height: 140px;
+      border: 1px solid grey;
+    }
+
+    &-header {
+      border-bottom: 1px solid grey;
+
+      &-date {
+        text-align: left;
+        border-right: 1px solid grey;
+        max-width: 3rem !important;
+      }
+
+      &-weekday {
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  &-goal {
+    border: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+
+    img {
+      width: 24px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-container {
+      padding: 0.2rem !important;
+    }
+  }
+}

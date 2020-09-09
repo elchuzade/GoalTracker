@@ -29,3 +29,14 @@ type reducerAction = {
   type: string;
   payload: object
 }
+
+type Goal = {
+  title: string;
+  description: string;
+  status: Status;
+}
+
+type Status = {
+  date: string;
+  completed: boolean;
+}
