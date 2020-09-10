@@ -35,6 +35,10 @@
     align-items: center;
     padding: 0.2rem;
 
+    &-hidden {
+      opacity: 50%;
+    }
+
     img {
       width: 24px;
 

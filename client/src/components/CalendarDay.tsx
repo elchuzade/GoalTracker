@@ -16,7 +16,7 @@ const CalendarDay: FC<CalendarDayProps> = (props) => {
       <Row className='calendar-day-body'>
         {props.goals.map((goal, index) => 
           <Col key={index} className='calendar-goal-container'>
-            <div className='calendar-goal'>
+            <div className='calendar-goal calendar-goal-hidden'>
               <img src={`https://picsum.photos/24?random=${index}`} alt='goal-img' />
             </div>
           </Col>

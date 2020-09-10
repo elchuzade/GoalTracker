@@ -8,7 +8,7 @@ const validateGoalsInput = require('../../validation/goals')
 // @desc Get all goals
 // @access Private
 router.get(
-  '',
+  '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
   Goal.find({ deleted: false, user: req.user.id })
@@ -96,5 +96,28 @@ router.put(
         return res.status(404).json(errors)
     })
 })
+
+var CronJob = require('cron').CronJob;
+var job = new CronJob('0 0 * * *', function() {
+  console.log('Updating goals for the next day');
+  Goal
+    .find()
+    .then(goals => {
+      goals.forEach(goal => {
+        let updatedStatus = [...goal.status, {
+          date: Date.now(),
+          complete: false
+        }]
+        goal.status = updatedStatus
+        goal.save()
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+}, null, true, 'America/Los_Angeles');
+
+job.start();
 
 module.exports = router
