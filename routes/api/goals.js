@@ -31,6 +31,11 @@ router.get(
   (req, res) => {
   Goal.findById(req.params.id)
     .then(goal => {
+      if (goal.deleted) {
+        errors.message = 'Goal is deleted'
+        return res.status(400).json(errors)
+      }
+
       return res.status(200).json(goal)
     })
     .catch(err => {
@@ -81,6 +86,11 @@ router.put(
   }
   Goal.findById(req.params.id)
     .then(goal => {
+      if (goal.deleted) {
+        errors.message = 'Goal is deleted'
+        return res.status(400).json(errors)
+      }
+
       if (req.body.title) goal.title = req.body.title
       if (req.body.description) goal.description = req.body.description
 
@@ -97,8 +107,41 @@ router.put(
     })
 })
 
+// @route DELETE api/goals/:id
+// @desc Delete goal
+// @access Private
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+  const { errors, isValid } = validateGoalsInput(req.body)
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors)
+  }
+  Goal.findById(req.params.id)
+    .then(goal => {
+      if (goal.deleted) {
+        errors.message = 'Goal is deleted'
+        return res.status(400).json(errors)
+      }
+
+      goal.deleted = true
+      goal
+        .save()
+        .then(savedGoal => {
+          return res.status(200).json(savedGoal)
+        })
+    })
+    .catch(err => {
+      errors.message = 'Goal not found'
+        console.log(err)
+        return res.status(404).json(errors)
+    })
+})
+
 var CronJob = require('cron').CronJob;
-var job = new CronJob('0 0 * * *', function() {
+var job = new CronJob('0 10 * * *', function() {
   console.log('Updating goals for the next day');
   Goal
     .find()
